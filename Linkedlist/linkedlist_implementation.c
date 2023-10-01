@@ -73,9 +73,6 @@ struct Node* deletefromfront(struct Node* head){
     if( head == NULL){
         return NULL;
     }
-    if(head->next == NULL){
-        return head;
-    }
     head = head->next;
 }
 
@@ -133,20 +130,12 @@ void main() {
            head =  addbetweenf(head ,data, position);
         } 
             break;
-
         case 4: display(head);
 
-        case 5 : head = deletefromfront();
+        break;
 
-        case 6 : head = deletefromend();
-
-        case 7 :{
-            int position;
-            printf("Enter the position you want to delete");
-            scanf("%d", position);
-            head = deletefromposition(int position);
-        }
-
+        case 5 : head = deletefromfront(head);
+        break;
         default:
         break;
         }
