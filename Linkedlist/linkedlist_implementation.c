@@ -69,6 +69,16 @@ struct Node* addbetweenf(struct Node* head , int data , int position){
     prev->next = newNode;
     return head;
 }
+struct Node* deletefromfront(struct Node* head){
+    if( head == NULL){
+        return NULL;
+    }
+    if(head->next == NULL){
+        return head;
+    }
+    head = head->next;
+}
+
 void main() {
 
     struct Node* head=NULL;
@@ -79,6 +89,9 @@ void main() {
         printf("Enter 2 to add to the end of the list \n ");
         printf("Enter 3 to add between the list \n");
         printf("Enter 4 to display the list \n");
+        printf("Enter 5 to delete the element from the front ");
+        printf("Enter 6 to delete the element from the end ");
+        printf("Enter 7 to delete the element from a certain postion");
         int ch;
         scanf_s("%d", &ch);
 
@@ -122,6 +135,18 @@ void main() {
             break;
 
         case 4: display(head);
+
+        case 5 : head = deletefromfront();
+
+        case 6 : head = deletefromend();
+
+        case 7 :{
+            int position;
+            printf("Enter the position you want to delete");
+            scanf("%d", position);
+            head = deletefromposition(int position);
+        }
+
         default:
         break;
         }
