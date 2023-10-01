@@ -1,12 +1,15 @@
 #include<stdio.h>
 #include <malloc.h>
+#include<stdlib.h>
 
-struct Node {
+ struct Node {
     struct Node* next;
     int data;
 };
-struct Node* addtofront(struct Node* head, int data) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+typedef struct Node Node;
+
+ Node* addtofront(struct Node* head, int data) {
+    Node* newNode = malloc(sizeof( Node));
     newNode->data = data;
     newNode->next = NULL;
     if (head == NULL) {
@@ -20,15 +23,15 @@ struct Node* addtofront(struct Node* head, int data) {
     return head;
 }
 
-struct Node* addtoend(struct Node* head, int data) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+ Node* addtoend(struct Node* head, int data) {
+     Node* newNode =malloc(sizeof(Node));
     newNode->next = NULL;
     newNode->data = data;
     if (head == NULL) {
         head = newNode;
     }
     else {
-        struct Node* temp = head;
+        Node* temp = head;
         while (temp->next != NULL)
         {
             temp = temp->next;
@@ -37,8 +40,8 @@ struct Node* addtoend(struct Node* head, int data) {
     }
     return head;
 }
-void display(struct Node* head) {
-    struct Node* temp = head;
+void display(Node* head) {
+     Node* temp = head;
     while (temp != NULL)
     {
         printf("%d, ",temp->data);
@@ -46,13 +49,13 @@ void display(struct Node* head) {
     }
     printf("\n");
 }
-struct Node* addbetweenf(struct Node* head , int data , int position){
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+ Node* addbetweenf( Node* head , int data , int position){
+     Node* newNode = malloc(sizeof( Node));
     newNode->next = NULL;
     newNode->data = data;
     int count =1;
-    struct Node* temp = head ;
-    struct Node* prev = NULL;
+     Node* temp = head ;
+     Node* prev = NULL;
     while (temp->next != NULL && count != position)
     {
         if(count == position)
@@ -69,26 +72,41 @@ struct Node* addbetweenf(struct Node* head , int data , int position){
     prev->next = newNode;
     return head;
 }
-struct Node* deletefromfront(struct Node* head){
+ Node* deletefromfront( Node* head){
     if( head == NULL){
         return NULL;
     }
     head = head->next;
 }
+ Node* deletefromend( Node* head ){
+    if( head->next == NULL){
+        printf("list empty");
+        return NULL;
+    }
+     Node* temp = head;
+     Node* prev = NULL;
+    while (temp->next != NULL)
+    {
+        prev =temp;
+        temp = temp->next;
+    }
+    prev->next = NULL;
+    return head;
+    
+}
+
 
 void main() {
-
-    struct Node* head=NULL;
-
+     Node* head=NULL;
     while (1)
     {
         printf("Enter 1 to add to the front of the  list \n");
         printf("Enter 2 to add to the end of the list \n ");
         printf("Enter 3 to add between the list \n");
         printf("Enter 4 to display the list \n");
-        printf("Enter 5 to delete the element from the front ");
-        printf("Enter 6 to delete the element from the end ");
-        printf("Enter 7 to delete the element from a certain postion");
+        printf("Enter 5 to delete the element from the front \n ");
+        printf("Enter 6 to delete the element from the end \n ");
+        printf("Enter 7 to delete the element from a certain postion \n");
         int ch;
         scanf_s("%d", &ch);
 
@@ -136,6 +154,8 @@ void main() {
 
         case 5 : head = deletefromfront(head);
         break;
+         case 6 : head = deletefromend(head);
+         break;
         default:
         break;
         }
