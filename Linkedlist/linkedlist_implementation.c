@@ -98,6 +98,9 @@ Node* deleteBetween(Node* head , int position){
     Node* temp = head;
     Node* prev  = NULL;
     int count =1;
+    if(position == 1)
+    head = head->next;
+
     while (temp->next !=NULL && count != position)
     {   prev = temp;
         temp = temp->next;
@@ -107,7 +110,21 @@ Node* deleteBetween(Node* head , int position){
     return head;
     
 }
-
+Node* reverse( Node* head){
+    Node* curr  =head;
+    Node* prev  =NULL;
+    Node* next ;
+    while (curr != NULL)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr ;
+        curr = next;
+    }
+    display(prev);
+    return prev;
+    
+}
 
 void main() {
      Node* head=NULL;
@@ -120,6 +137,7 @@ void main() {
         printf("Enter 5 to delete the element from the front \n ");
         printf("Enter 6 to delete the element from the end \n ");
         printf("Enter 7 to delete the element from a certain postion \n");
+        printf("enter 8 to reverse the linkedlist \n ");
         int ch;
         scanf_s("%d", &ch);
 
@@ -180,10 +198,13 @@ void main() {
 
         case 7 :{
             int  position;
-            printf("Enter the position where you want to insert the element");
+            printf("Enter the position where you want to delete the element");
             scanf("%d",&position);
             head = deleteBetween(head,position);
-        } 
+    
+        }
+        break;
+        case 8 : head = reverse(head);
         break;
         default:
         break;
