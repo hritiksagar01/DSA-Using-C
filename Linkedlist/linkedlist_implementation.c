@@ -94,6 +94,19 @@ void display(Node* head) {
     return head;
     
 }
+Node* deleteBetween(Node* head , int position){
+    Node* temp = head;
+    Node* prev  = NULL;
+    int count =1;
+    while (temp->next !=NULL && count != position)
+    {   prev = temp;
+        temp = temp->next;
+        count++;
+    }
+    prev->next = temp->next;
+    return head;
+    
+}
 
 
 void main() {
@@ -115,26 +128,33 @@ void main() {
         case 1:
         {
             printf("Enter a number to add to the front of the list \n");
-            int input;
-            scanf_s("%d",&input);
+            char input[100];
+            scanf_s("%s",&input);
 
-            if (input == 100) {
+            if (input == "quit") {
                 break;
             }
-            else
-                head = addtofront(head, (input));
+            else{
+                int y = atoi(input);
+                head = addtofront(head,(y));
+            }
+                
         }
         break;
         case 2: {
-            int input;
+            char input[100];
             while (1) {
                 printf("Now enter the number which will be pushed the end of the list \n");
-                scanf_s("%d",&input);
-                if (input ==100) {
+                scanf_s("%s",&input);
+                if (strcmp(input , "quit") == 0) {
                     break;
                 }
                 else
-                    head = addtoend(head, (input));
+                {
+                    int y = atoi(input);
+                    head = addtoend(head,(y));
+                    }
+
             }
         }
               break;
@@ -153,9 +173,18 @@ void main() {
         break;
 
         case 5 : head = deletefromfront(head);
+
         break;
-         case 6 : head = deletefromend(head);
-         break;
+        case 6 : head = deletefromend(head);
+        break;
+
+        case 7 :{
+            int  position;
+            printf("Enter the position where you want to insert the element");
+            scanf("%d",&position);
+            head = deleteBetween(head,position);
+        } 
+        break;
         default:
         break;
         }
